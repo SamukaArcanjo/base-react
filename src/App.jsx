@@ -1,10 +1,13 @@
 import Header from "./Header"
+import AdicionarTarefa from "./AdicionarTarefa"
 
 
 function App() {
   return (
-    <Header />
-
+    <div>
+      <Header />
+      <AdicionarTarefa />
+    </div>
   )
 }
 
