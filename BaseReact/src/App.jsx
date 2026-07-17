@@ -36,12 +36,7 @@ function App() {
 
   // FUNÇÃO EXCLUIR TAREFA
   function deleteTask(taskId) {
-    const newTasks = tasks.filter((task) => {
-      if (task.id === taskId) {
-        return false;
-      }
-      return true;
-    });
+    const newTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(newTasks);
   }
 
