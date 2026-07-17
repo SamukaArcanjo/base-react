@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import Tasks from "./components/Task";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      title: "Estudar React",
+      description: "Estudar react por pelo menos 2 horas ao dia",
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      title: "Treinar",
+      description: "Fazer 50 flexoes",
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      title: "Trabalhar",
+      description: "Continuar o projeto que estava fazendo semana passada",
+      isCompleted: false,
+    },
+  ]);
+
+  // FUNCÃO TAREFA COMPLETA
+  function taskCompleted(taskId) {
+    const newTask = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, isCompleted: !task.isCompleted };
+      }
+      return task;
+    });
+    setTasks(newTask);
+  }
+
+  // FUNÇÃO EXCLUIR TAREFA
+  function deleteTask(taskId) {
+    const newTasks = tasks.filter((task) => {
+      if (task.id === taskId) {
+        return false;
+      }
+      return true;
+    });
+    setTasks(newTasks);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="bg-[#080825] h-screen w-screen flex p-6 justify-center">
+      <div className="w-[500px]">
+        <h1 className="text-4xl font-bold text-[#fff] text-center p-6">
+          Gerenciador de tarefas
+        </h1>
+        <Tasks
+          tasks={tasks}
+          taskCompleted={taskCompleted}
+          deleteTask={deleteTask}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
