@@ -11,8 +11,8 @@ function AddTask({ addTaskOnClick }) {
         placeholder="Digite o titulo da tarefa"
         className="border border-[#080825] outline-[#161663] px-4 py-2 rounded-md"
         value={title}
-        onChange={(titleTask) => {
-          setTitle(titleTask.target.value);
+        onChange={(event) => {
+          setTitle(event.target.value);
         }}
       />
       <input
@@ -20,13 +20,18 @@ function AddTask({ addTaskOnClick }) {
         placeholder="Digite a descrição da tarefa"
         className="border border-[#080825] outline-[#161663] px-4 py-2 rounded-md"
         value={description}
-        onChange={(descriptionTask) => {
-          setDescription(descriptionTask.target.value);
+        onChange={(event) => {
+          setDescription(event.target.value);
         }}
       />
       <button
         onClick={() => {
+          if (!title.trim() || !description.trim()) {
+            return alert("Preencha o titulo e a descrição da tarefa");
+          }
           addTaskOnClick(title, description);
+          setTitle("");
+          setDescription("");
         }}
         className="bg-[#080825] text-white py-2 rounded-md font-medium"
       >

@@ -44,7 +44,7 @@ function App() {
   // ADICIONAR TAREFA
   function addTaskOnClick(title, description) {
     const newTask = {
-      id: tasks.lenght + 1,
+      id: tasks.length + 1,
       title,
       description,
       isCompleted: false,
