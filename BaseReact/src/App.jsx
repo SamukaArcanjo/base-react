@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Tasks from "./components/Task";
+import AddTask from "./components/AddTask";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -40,12 +41,27 @@ function App() {
     setTasks(newTasks);
   }
 
+  // ADICIONAR TAREFA
+  function addTaskOnClick(title, description) {
+    const newTask = {
+      id: tasks.lenght + 1,
+      title,
+      description,
+      isCompleted: false,
+    };
+
+    setTasks([...tasks, newTask]);
+  }
+
   return (
-    <div className="bg-[#080825] h-screen w-screen flex p-6 justify-center">
-      <div className="w-[500px]">
+    <div className="bg-[#080825] h-screen w-screen flex p-6 justify-center ">
+      <div className="w-[500px] space-y-4">
         <h1 className="text-4xl font-bold text-[#fff] text-center p-6">
           Gerenciador de tarefas
         </h1>
+
+        <AddTask addTaskOnClick={addTaskOnClick}/>
+
         <Tasks
           tasks={tasks}
           taskCompleted={taskCompleted}
