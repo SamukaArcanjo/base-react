@@ -60,7 +60,7 @@ function App() {
           Gerenciador de tarefas
         </h1>
 
-        <AddTask addTaskOnClick={addTaskOnClick}/>
+        <AddTask addTaskOnClick={addTaskOnClick} />
 
         <Tasks
           tasks={tasks}
