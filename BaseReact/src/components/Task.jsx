@@ -1,6 +1,15 @@
 import { ChevronRightIcon, Trash } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Tasks({ tasks, taskCompleted, deleteTask }) {
+  const navigate = useNavigate();
+
+  function onSeeDetails(task) {
+    navigate(
+      `/details?title=${encodeURIComponent(task.title)}&description=${encodeURIComponent(task.description)}`,
+    );
+  }
+
   return (
     <ul className="flex flex-col gap-3 bg-[#ffffff] p-6 rounded-md shadow">
       {tasks.map((task) => (
@@ -15,6 +24,7 @@ function Tasks({ tasks, taskCompleted, deleteTask }) {
 
           {/* Botão de Ver Detalhes */}
           <button
+            onClick={() => onSeeDetails(task)}
             className={`rounded-md p-2 text-[#fdfdfd] ${task.isCompleted ? "bg-[#1b662f]" : "bg-[#080825]"}`}
           >
             <ChevronRightIcon />
