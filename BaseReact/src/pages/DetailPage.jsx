@@ -1,7 +1,8 @@
 import { ChevronLeft } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function DetailPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const title = searchParams.get("title");
   const description = searchParams.get("description");
@@ -9,7 +10,12 @@ function DetailPage() {
   return (
     <div className="bg-[#080825] w-screen h-screen p-6 flex flex-col justify-start items-center gap-6">
       <div className="w-[500px] flex justify-center relative">
-        <button className="absolute left-0 top-1/2 -translate-y-1/2  text-white">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="absolute left-0 top-1/2 -translate-y-1/2  text-white"
+        >
           <ChevronLeft />
         </button>
         <h1 className="text-4xl font-bold text-[#fff] text-center ">
