@@ -13,11 +13,24 @@ function App() {
   }, [tasks]);
 
   useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/todos",
+          {
+            method: "GET",
+          },
+        );
 
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos')
-  },[])
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Erro ao buscar tarefas:", error);
+      }
+    };
 
-
+    fetchTasks();
+  }, []); // [] garante que a API seja chamada apenas uma vez ao carregar a tela
 
   // FUNCÃO TAREFA COMPLETA
   function taskCompleted(taskId) {
