@@ -1,28 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tasks from "./components/Task";
 import AddTask from "./components/AddTask";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Estudar React",
-      description: "Estudar react por pelo menos 2 horas ao dia",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "Treinar",
-      description: "Fazer 50 flexoes",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "Trabalhar",
-      description: "Continuar o projeto que estava fazendo semana passada",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("Lista de tarefas") || []),
+  );
+
+  useEffect(() => {
+    // GUARDANDO TASKS EM LOCAL STORAGE
+    localStorage.setItem("Lista de tarefas", JSON.stringify(tasks));
+  }, [tasks]);
+
+  useEffect(() => {
+
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+  },[])
+
+
 
   // FUNCÃO TAREFA COMPLETA
   function taskCompleted(taskId) {
