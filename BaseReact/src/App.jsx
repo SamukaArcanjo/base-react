@@ -3,9 +3,10 @@ import Tasks from "./components/Task";
 import AddTask from "./components/AddTask";
 
 function App() {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("Lista de tarefas") || []),
-  );
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("Lista de tarefas");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
 
   useEffect(() => {
     // GUARDANDO TASKS EM LOCAL STORAGE
@@ -14,22 +15,19 @@ function App() {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/todos",
-          {
-            method: "GET",
-          },
-        );
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos?_limit=5",
 
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error("Erro ao buscar tarefas:", error);
-      }
+        {
+          method: "GET",
+        },
+      );
+      const data = await response.json();
+
+      setTasks(data);
     };
-
-    fetchTasks();
+    // VOCÊ PODE CHAMAR UMA API
+    // fetchTasks();
   }, []); // [] garante que a API seja chamada apenas uma vez ao carregar a tela
 
   // FUNCÃO TAREFA COMPLETA
