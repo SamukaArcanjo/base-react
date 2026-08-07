@@ -1,15 +1,23 @@
 function List(props) {
   return (
-    <ul>
-      {props.animals.map((animal) => {
-        return <li key={animal}>{animal}</li>;
-      })}
-    </ul>
+    <>
+      {!props.animals ? (
+        <div>Carregando....</div>
+      ) : props.animals.length > 0 ? (
+        <ul>
+          {props.animals.map((animal) => {
+            return <li key={animal}> {animal} </li>;
+          })}
+        </ul>
+      ) : (
+        <div>Sorry, but we dont have animals</div>
+      )}
+    </>
   );
 }
 
 function App() {
-  const animals = ["lion", "cow", "snake", "Lizard"];
+  const animals = ["Lion", "cow", "snake", "Lizard"];
 
   return (
     <div>
